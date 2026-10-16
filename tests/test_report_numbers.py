@@ -5,7 +5,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "data" / "output"
-HTML = ROOT / "报告" / "酒类渠道对账与销售绩效分析.html"
+HTML = ROOT / "report" / "酒类渠道对账与销售绩效分析.html"
 
 
 def _html():

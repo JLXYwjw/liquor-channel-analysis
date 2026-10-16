@@ -22,7 +22,7 @@
 ![商品帕累托](assets/chart_04.png)
 ![年度销量](assets/chart_05.png)
 
-> 完整交互版报告：`报告/酒类渠道对账与销售绩效分析.html`——GitHub 不渲染仓库内 HTML，clone 后本地打开。
+> 完整交互版报告：`report/酒类渠道对账与销售绩效分析.html`——GitHub 不渲染仓库内 HTML，clone 后本地打开。
 
 ## 四、诚实说明
 
@@ -69,7 +69,7 @@ pytest tests/ -q
 ```
 scripts/ clean_data.py / analyze.py / ml_analysis.py
 tests/   test_cleaning.py, test_report_numbers.py
-报告/   酒类渠道对账与销售绩效分析.html  （勃艮第红+金配色，每个图表 Insight+Action）
+report/   酒类渠道对账与销售绩效分析.html  （勃艮第红+金配色，每个图表 Insight+Action）
 ```
 
 — Jiawei Wang
