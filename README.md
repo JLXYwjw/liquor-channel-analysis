@@ -27,7 +27,7 @@ profiles categories/suppliers on **real** Ohio liquor sales data (307,645 rows,
 ![Item Pareto](assets/chart_EN_04.png)
 ![Annual volume](assets/chart_EN_05.png)
 
-> Full interactive report: `报告/酒类渠道对账与销售绩效分析.html` — GitHub doesn't render HTML; open locally after cloning.
+> Full interactive report: open `index.html` (English) or `index.zh-CN.html` (Chinese) after cloning — GitHub doesn't render HTML.
 
 ## Honest notes
 
@@ -79,7 +79,8 @@ pytest tests/ -q
 ```
 scripts/ clean_data.py / analyze.py / ml_analysis.py
 tests/   test_cleaning.py, test_report_numbers.py
-报告/   酒类渠道对账与销售绩效分析.html  (burgundy-gold theme, each chart Insight+Action)
+index.html   # English interactive report
+index.zh-CN.html  # Chinese report (burgundy-gold theme, each chart Insight+Action)
 ```
 
 — Jiawei Wang
