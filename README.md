@@ -39,6 +39,12 @@ profiles categories/suppliers on **real** Ohio liquor sales data (307,645 rows,
 - Top10 suppliers 65.8%; item top1% 61.1%, top10% 93.7%
 - Supplier clusters: 4 (large wholesale / mid / small / retail)
 
+## 报告预览
+
+![报告预览](assets/report-preview.jpg)
+
+> 完整交互报告：`报告/酒类渠道对账与销售绩效分析.html` —— GitHub 不渲染仓库内 HTML，clone 后本地打开。
+
 ## Layout
 
 ```
