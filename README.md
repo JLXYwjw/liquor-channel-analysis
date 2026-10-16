@@ -19,15 +19,24 @@ profiles categories/suppliers on **real** Ohio liquor sales data (307,645 rows,
 - **Supplier clustering** (KMeans, no labels): large wholesale / mid-balanced /
   small warehouse / retail-focused.
 
+## Charts
+
+![Channel reconciliation](assets/chart_01.png)
+![Category x channel](assets/chart_02.png)
+![Supplier concentration](assets/chart_03.png)
+![Item Pareto](assets/chart_04.png)
+![Annual volume](assets/chart_05.png)
+
+> Full interactive report: `报告/酒类渠道对账与销售绩效分析.html` — GitHub doesn't render HTML; open locally after cloning.
+
 ## Honest notes
 
-- **Monthly data is incomplete** (2018 = only Jan–Feb, 2020 missing stretches;
-  24 usable months). Class-level monthly forecasting gives **negative R² (mean
-  -1.89)** — worse than predicting the mean. **I do not use forecasts as
-  recommendations** and say so; the report is a structural diagnostic, not a
-  time-series extrapolation.
-- Some categories carry **negative values** (returns/adjustments, e.g. OTHER
-  -142K) — identified, not treated as main business.
+- **Monthly data is incomplete** (2018 = only Jan–Feb, 2020 missing stretches; 24
+  usable months). Class-level monthly forecasting gives **negative R² (mean -1.89)**
+  — worse than predicting the mean. **I do not use forecasts as recommendations**
+  and say so; the report is a structural diagnostic, not a time-series extrapolation.
+- Some categories carry **negative values** (returns/adjustments, e.g. OTHER -142K)
+  — identified, not treated as main business.
 - **No deep learning**: few monthly points, no learnable sequence; clustering +
   statistics are interpretable and deployable.
 
@@ -39,11 +48,31 @@ profiles categories/suppliers on **real** Ohio liquor sales data (307,645 rows,
 - Top10 suppliers 65.8%; item top1% 61.1%, top10% 93.7%
 - Supplier clusters: 4 (large wholesale / mid / small / retail)
 
-## 报告预览
+## Data source
 
-![报告预览](assets/report-preview.jpg)
+Raw data lives in `data/raw/` (excluded from git — after cloning, download it yourself).
 
-> 完整交互报告：`报告/酒类渠道对账与销售绩效分析.html` —— GitHub 不渲染仓库内 HTML，clone 后本地打开。
+| File | What it is | Kaggle download |
+|---|---|---|
+| `Warehouse_and_Retail_Sales.csv` | Ohio liquor sales, 307,645 rows (2017–2020) | `kaggle datasets download -d lalit7881/warehouse-and-retail-sales -p data/raw --unzip` |
+
+Kaggle page: https://www.kaggle.com/datasets/lalit7881/warehouse-and-retail-sales
+
+```bash
+pip install kaggle
+kaggle datasets download -d lalit7881/warehouse-and-retail-sales -p data/raw --unzip
+# requires a kaggle.json / KAGGLE_USERNAME + KAGGLE_KEY
+```
+
+## Run
+
+```bash
+pip install -r requirements.txt
+python scripts/clean_data.py
+python scripts/analyze.py
+python scripts/ml_analysis.py
+pytest tests/ -q
+```
 
 ## Layout
 
@@ -51,22 +80,6 @@ profiles categories/suppliers on **real** Ohio liquor sales data (307,645 rows,
 scripts/ clean_data.py / analyze.py / ml_analysis.py
 tests/   test_cleaning.py, test_report_numbers.py
 报告/   酒类渠道对账与销售绩效分析.html  (burgundy-gold theme, each chart Insight+Action)
-```
-
-## 数据来源
-
-原始数据在项目内 `data/raw/`（不入 git——clone 后请自行下载）。
-
-| 文件 | 说明 | Kaggle 下载 |
-|---|---|---|
-| `Warehouse_and_Retail_Sales.csv` | Ohio 州酒类销售，307,645 行（2017–2020） | `kaggle datasets download -d lalit7881/warehouse-and-retail-sales -p data/raw --unzip` |
-
-Kaggle 页面：https://www.kaggle.com/datasets/lalit7881/warehouse-and-retail-sales
-
-```bash
-pip install kaggle
-kaggle datasets download -d lalit7881/warehouse-and-retail-sales -p data/raw --unzip
-# 需要 kaggle.json / KAGGLE_USERNAME + KAGGLE_KEY 认证
 ```
 
 — Jiawei Wang
