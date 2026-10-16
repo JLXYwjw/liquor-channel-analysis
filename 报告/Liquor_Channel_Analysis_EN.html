@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Liquor Channel Reconciliation &amp; Sales Performance</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='15' fill='%23722f37'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%23c9a227'/%3E%3C/svg%3E">
+<style>
+  :root{--ink:#2b1a1d;--wine:#722f37;--crimson:#9d2933;--gold:#c9a227;--rose:#d8a8a0;--bg:#fdf7f2;--line:#ecd9cd;--card:#fff;--muted:#7d6167}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.7}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px 80px}
+  header.hero{background:linear-gradient(135deg,#4a1f26,#722f37);color:#fff;padding:56px 24px 44px;margin-bottom:8px}
+  header.hero h1{margin:0 0 12px;font-size:30px;line-height:1.25}
+  header.hero .sub{opacity:.94;font-size:16px;max-width:900px}
+  header.hero .meta{margin-top:18px;font-size:13px;opacity:.85}
+  nav.tabs{position:sticky;top:0;background:#fff;border-bottom:1px solid var(--line);z-index:5;padding:10px 24px}
+  nav.tabs .wrap{padding:0;display:flex;gap:6px;flex-wrap:wrap;max-width:1080px}
+  nav.tabs a{color:var(--wine);text-decoration:none;font-size:13px;font-weight:600;padding:6px 12px;border-radius:999px}
+  nav.tabs a:hover{background:#f6e6dd}
+  section{padding:36px 0;border-bottom:1px solid var(--line)}
+  h2{font-size:22px;margin:0 0 8px}
+  h2 .n{color:var(--wine)}
+  .kicker{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--wine);margin-bottom:4px}
+  h3{font-size:17px;margin:24px 0 8px}
+  p,li{font-size:14.5px}
+  .muted{color:var(--muted)}
+  .grid{display:grid;gap:16px}
+  .cards{grid-template-columns:repeat(3,1fr);margin:18px 0}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;box-shadow:0 1px 3px rgba(114,47,55,.08)}
+  .card .num{font-size:26px;font-weight:800;color:var(--wine)}
+  .card .lbl{font-size:13px;color:var(--muted)}
+  table{width:100%;border-collapse:collapse;font-size:14px;margin:14px 0;background:#fff;table-layout:fixed}
+  th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top;overflow-wrap:break-word}
+  th{background:#f9ece4;font-weight:700;color:var(--wine)}
+  .fig{margin:22px 0;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 16px;box-shadow:0 1px 3px rgba(114,47,55,.08)}
+  .fig h4{font-size:15px;margin:0 0 4px}
+  .fig .cap{font-size:12px;color:var(--muted);margin:0 0 12px}
+  .fig .why{display:flex;gap:12px;margin-top:14px;border-top:1px dashed var(--line);padding-top:12px}
+  .fig .why .tag{flex:0 0 60px;font-size:11px;font-weight:800;letter-spacing:.04em;text-transform:uppercase}
+  .fig .why .tag.so{color:var(--wine)}
+  .fig .why .tag.rec{color:var(--gold)}
+  .fig .why p{margin:0;font-size:13.5px}
+  .pill{display:inline-block;background:#f6e6dd;color:var(--wine);border-radius:999px;padding:2px 10px;font-size:12px;font-weight:600;margin-right:6px}
+  .callout{background:#f9ece4;border:1px solid #e8c9b6;border-left:4px solid var(--gold);padding:12px 16px;border-radius:8px;margin:14px 0;font-size:14px}
+  .two{grid-template-columns:1fr 1fr}
+  @media(max-width:720px){.two{grid-template-columns:1fr}.cards{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:520px){.bar{flex-wrap:wrap}.bar .bl{flex:0 0 100%;text-align:left;font-size:12px}.bar .bv{flex:0 0 120px;font-size:11px}.bar .track{min-width:40px}}
+  footer{padding:30px 24px 60px;font-size:12.5px;color:var(--muted)}
+  ul{margin:6px 0 14px;padding-left:20px}
+  .bar{display:flex;align-items:center;gap:10px;margin:7px 0;font-size:13px}
+  .bar .bl{width:190px;flex:0 0 190px;text-align:right;color:var(--ink)}
+  .bar .track{flex:1;background:#f0dfd5;border-radius:6px;height:22px;position:relative;min-width:60px}
+  .bar .fill{height:100%;border-radius:6px}
+  .bar .bv{flex:0 0 120px;color:var(--muted);font-size:12px}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="kicker" style="color:#f2d0a0">Data Analysis · Liquor Channel Reconciliation &amp; Sales Performance</div>
+    <h1>Liquor Channel Reconciliation &amp; Sales Performance</h1>
+    <p class="sub">Analysis of 308k liquor wholesale sales (2017–2020): reconcile the retail/warehouse/transfer channel structure, quantify channel coverage gaps and supplier concentration, and identify high-performing categories &amp; assortment directions.</p>
+    <div class="meta">Data: liquor wholesale sales · 307,645 lines / 37,321 items / 397 suppliers · 2017–2020</div>
+  </div>
+</header>
+
+<nav class="tabs">
+  <div class="wrap">
+    <a href="#s1"><span class="n">1</span> · Objective</a>
+    <a href="#s2"><span class="n">2</span> · Cleaning</a>
+    <a href="#s3"><span class="n">3</span> · Metrics &amp; Charts</a>
+    <a href="#s4"><span class="n">4</span> · Performance Modeling</a>
+    <a href="#s5"><span class="n">5</span> · Recommendations</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+<section id="s1">
+  <div class="kicker">Part 1 · Business Objective</div>
+  <h2><span class="n">1.</span> Why this analysis</h2>
+  <p>A liquor wholesaler ships through <strong>three channels</strong>: warehouse wholesale (to downstream retailers), retail (direct/store), transfer (internal inter-warehouse). Core questions:</p>
+  <ul>
+    <li><strong>Channel reconciliation</strong>: what is the volume structure across channels? Which items have <strong>retail = 0</strong> (channel coverage gap)? Is transfer reasonable?</li>
+    <li><strong>Category &amp; supplier performance</strong>: which of WINE/BEER/LIQUOR is growing? Is the supplier base <strong>over-concentrated</strong> (pricing &amp; supply-cut risk)?</li>
+  </ul>
+  <p><strong>One-line goal:</strong> use channel reconciliation to see "which channel the goods go through and who contributes volume", identify coverage gaps &amp; concentration risk, and guide channel &amp; assortment decisions.</p>
+  <p><strong>Honest boundary.</strong> Monthly data is <strong>non-continuous</strong> (2018 only Jan–Feb, 2020 has missing stretches, 24 valid months total) → <strong>monthly forecasting is unreliable</strong> (Part 4, R² negative); some categories contain <strong>negative values</strong> (returns/adjustments, e.g. OTHER -142k) — identified but not used as the main analysis. Reconciliation &amp; analysis focus on <strong>totals and structure</strong>, not unreliable time-series extrapolation.</p>
+</section>
+
+<section id="s2">
+  <div class="kicker">Part 2 · Cleaning &amp; Preprocessing</div>
+  <h2><span class="n">2.</span> How raw sales became usable tables</h2>
+  <table>
+    <colgroup><col style="width:34%"><col style="width:66%"></colgroup>
+    <tr><th>Issue</th><th>Handling</th></tr>
+    <tr><td>Separate YEAR/MONTH</td><td>Composed date <code>ym</code> (2017-06 ~ 2020-09), data gaps marked</td></tr>
+    <tr><td>SUPPLIER missing 167</td><td>Filled <code>UNKNOWN</code> (tiny share)</td></tr>
+    <tr><td>ITEM TYPE missing 1 / misc</td><td>STR_SUPPLIES/REF/DUNNAGE → <code>OTHER</code>; missing → <code>UNKNOWN</code></td></tr>
+    <tr><td>RETAIL SALES missing 3</td><td>Filled 0</td></tr>
+    <tr><td>Negative values</td><td>Identified as returns/adjustments (KEGS transfer -1, OTHER warehouse -142k), not used as main analysis</td></tr>
+    <tr><td>Derived</td><td>Total = retail + warehouse + transfer; main channel; line/item/supplier/monthly four tables</td></tr>
+  </table>
+  <p class="muted">Output: <code>sales_clean.parquet</code>, <code>item_level.parquet</code> (37,321), <code>supplier_level.parquet</code> (397), <code>monthly_agg.parquet</code>.</p>
+</section>
+
+<section id="s3">
+  <div class="kicker">Part 3 · Key Metrics &amp; Charts</div>
+  <h2><span class="n">3.</span> Key numbers</h2>
+  <div class="grid cards">
+    <div class="card"><div class="num">308k</div><div class="lbl">Sales lines</div></div>
+    <div class="card"><div class="num">37k</div><div class="lbl">Items × 397 suppliers</div></div>
+    <div class="card"><div class="num">64.4%</div><div class="lbl">Warehouse (wholesale) dominates</div></div>
+    <div class="card"><div class="num">39.6%</div><div class="lbl">Lines with retail = 0</div></div>
+    <div class="card"><div class="num">65.8%</div><div class="lbl">Top10 suppliers' share</div></div>
+    <div class="card"><div class="num">61%</div><div class="lbl">Top1% items' volume</div></div>
+  </div>
+
+  <div class="fig">
+    <h4>Channel reconciliation — warehouse wholesale 64%, retail only 18%</h4>
+    <p class="cap">Total volume 12.08M cases: retail vs warehouse (wholesale) vs transfer</p>
+    <div class="bar"><div class="bl">Warehouse (wholesale)</div><div class="track"><div class="fill" style="width:100%;background:#722f37"></div></div><div class="bv">7.78M · 64.4%</div></div>
+    <div class="bar"><div class="bl">Retail (direct)</div><div class="track"><div class="fill" style="width:28%;background:#9d2933"></div></div><div class="bv">2.16M · 17.9%</div></div>
+    <div class="bar"><div class="bl">Transfer (inter-WH)</div><div class="track"><div class="fill" style="width:27%;background:#c9a227"></div></div><div class="bv">2.13M · 17.7%</div></div>
+    <div class="why">
+      <div class="tag so">Insight</div>
+      <p><strong>Warehouse wholesale is the absolute main channel (64.4%)</strong>, retail only 17.9%. Nearly 40% of lines have retail = 0 (volume via wholesale/transfer only) — the book is mainly a <strong>B2B wholesale structure</strong>, with limited retail direct coverage.</p>
+    </div>
+    <div class="why">
+      <div class="tag rec">Action</div>
+      <p>For <strong>high-volume but retail=0</strong> items, assess adding a retail channel (direct margin is usually higher); if retail isn't a target channel, clearly stay wholesale-first and cut needless transfer movement.</p>
+    </div>
+  </div>
+
+  <div class="fig">
+    <h4>Category × channel — BEER via wholesale, WINE balanced, LIQUOR retail+transfer</h4>
+    <p class="cap">Three-channel volume per category (cases)</p>
+    <div class="bar"><div class="bl">BEER (7.67M)</div><div class="track"><div class="fill" style="width:85%;background:#722f37"></div></div><div class="bv">wholesale 85%</div></div>
+    <div class="bar"><div class="bl">WINE (2.64M)</div><div class="track"><div class="fill" style="width:44%;background:#9d2933"></div></div><div class="bv">ret28/wh44/tr28%</div></div>
+    <div class="bar"><div class="bl">LIQUOR (1.69M)</div><div class="track"><div class="fill" style="width:47%;background:#c9a227"></div></div><div class="bv">ret47/tr47%</div></div>
+    <div class="bar"><div class="bl">KEGS (0.12M)</div><div class="track"><div class="fill" style="width:3%;background:#d8a8a0"></div></div><div class="bv">pure wholesale</div></div>
+    <div class="why">
+      <div class="tag so">Insight</div>
+      <p>Channel structures differ a lot by category: <strong>BEER 85% via warehouse wholesale</strong> (big accounts/retailers), <strong>WINE balanced across three channels</strong> (omnichannel), <strong>LIQUOR depends on retail+transfer</strong>, KEGS pure wholesale. Categories have different channel logic.</p>
+    </div>
+    <div class="why">
+      <div class="tag rec">Action</div>
+      <p>Set channel strategy per category: BEER consolidates wholesale big accounts; WINE keeps omnichannel (margin source); LIQUOR strengthen warehouse wholesale or compress high transfer (transfer = non-sales, a cost item).</p>
+    </div>
+  </div>
+
+  <div class="fig">
+    <h4>Supplier concentration — Top10 = 65.8%, beer giants dominate</h4>
+    <p class="cap">HHI concentration 705 (&gt;2500 = highly concentrated; 705 is medium-high here); top suppliers</p>
+    <div class="bar"><div class="bl">Crown Imports</div><div class="track"><div class="fill" style="width:100%;background:#722f37"></div></div><div class="bv">1.82M</div></div>
+    <div class="bar"><div class="bl">Miller Brewing</div><div class="track"><div class="fill" style="width:88%;background:#9d2933"></div></div><div class="bv">1.60M</div></div>
+    <div class="bar"><div class="bl">Anheuser Busch</div><div class="track"><div class="fill" style="width:85%;background:#9d2933"></div></div><div class="bv">1.55M</div></div>
+    <div class="bar"><div class="bl">Heineken USA</div><div class="track"><div class="fill" style="width:52%;background:#c9a227"></div></div><div class="bv">0.94M</div></div>
+    <div class="bar"><div class="bl">E & J Gallo</div><div class="track"><div class="fill" style="width:29%;background:#c9a227"></div></div><div class="bv">0.53M</div></div>
+    <div class="why">
+      <div class="tag so">Insight</div>
+      <p><strong>Top10 suppliers = 65.8% of volume</strong>; the top five are four brewers (Crown/Miller/AB/Heineken) + one winery (Gallo) — <strong>beer supply is highly concentrated</strong>, pricing and supply-cut risk are concentrated.</p>
+    </div>
+    <div class="why">
+      <div class="tag rec">Action</div>
+      <p>Sign volume-price agreements with top beer suppliers to lock supply; meanwhile nurture mid-size suppliers (Part 4 clustering) to diversify risk and improve pricing leverage.</p>
+    </div>
+  </div>
+
+  <div class="fig">
+    <h4>Item Pareto — Top1% of items drive 61% of volume (extremely concentrated)</h4>
+    <p class="cap">Item volume concentration (37,321 items)</p>
+    <div class="bar"><div class="bl">Top 1% items (~373)</div><div class="track"><div class="fill" style="width:61%;background:#722f37"></div></div><div class="bv">61.1% volume</div></div>
+    <div class="bar"><div class="bl">Top 10% items</div><div class="track"><div class="fill" style="width:94%;background:#9d2933"></div></div><div class="bv">93.7% volume</div></div>
+    <div class="why">
+      <div class="tag so">Insight</div>
+      <p><strong>~373 items (1%) drive 61% of volume; Top10% drive 94%</strong> — a handful of bestsellers decide the business; most items are long-tail (low-volume/display).</p>
+    </div>
+    <div class="why">
+      <div class="tag rec">Action</div>
+      <p>Secure supply &amp; display for head bestsellers; <strong>manage long-tail items precisely</strong> (keep high-margin niches, retire long-zero-sale SKUs) to avoid over-bloated SKU counts.</p>
+    </div>
+  </div>
+
+  <div class="fig">
+    <h4>Annual volume — 2019 peak; 2018/2020 incomplete</h4>
+    <p class="cap">Volume by year (cases); 2018 only Jan–Feb, 2020 missing stretches → no annual trend extrapolation</p>
+    <div class="bar"><div class="bl">2017</div><div class="track"><div class="fill" style="width:68%;background:#9d2933"></div></div><div class="bv">3.70M</div></div>
+    <div class="bar"><div class="bl">2018 (incomplete)</div><div class="track"><div class="fill" style="width:15%;background:#d8a8a0"></div></div><div class="bv">0.83M</div></div>
+    <div class="bar"><div class="bl">2019</div><div class="track"><div class="fill" style="width:100%;background:#722f37"></div></div><div class="bv">5.46M</div></div>
+    <div class="bar"><div class="bl">2020 (incomplete)</div><div class="track"><div class="fill" style="width:38%;background:#c9a227"></div></div><div class="bv">2.09M</div></div>
+    <div class="why">
+      <div class="tag so">Insight</div>
+      <p>2019 has the most complete data and highest volume (5.46M); <strong>2018/2020 are partial months</strong> (2018 0.83M, 2020 2.09M — clearly data gaps, not real decline). Peak month 2020-07 (0.60M).</p>
+    </div>
+    <div class="why">
+      <div class="tag rec">Action</div>
+      <p><strong>Do not judge annual trends from 2018/2020</strong> (incomplete). Cross-year comparisons should use 2017 vs 2019 as the baseline; 2020 needs complete data first.</p>
+    </div>
+  </div>
+</section>
+
+<section id="s4">
+  <div class="kicker">Part 4 · Performance Modeling</div>
+  <h2><span class="n">4.</span> Supplier performance clustering (principle · why · how)</h2>
+  <p><strong>Why clustering.</strong> The 397 suppliers differ widely in scale, channel and item count; unsupervised clustering groups them into <strong>similar-performance groups</strong>, then procurement/management resources are allocated accordingly — implementable without labels.</p>
+  <p><strong>Principle &amp; how.</strong> Standardize supplier <strong>volume (log), wholesale share, retail share, item count (log)</strong>, then KMeans into 4 groups:</p>
+  <table>
+    <colgroup><col style="width:22%"><col style="width:18%"><col style="width:20%"><col style="width:40%"></colgroup>
+    <tr><th>Group</th><th>Count</th><th>Avg volume</th><th>Profile</th></tr>
+    <tr><td>C0 large wholesale</td><td>93</td><td>109k</td><td>High volume, retail 15%, many items (~335) — core wholesale suppliers</td></tr>
+    <tr><td>C3 medium balanced</td><td>108</td><td>17.9k</td><td>Medium volume, retail 40%, ~41 items — potential suppliers</td></tr>
+    <tr><td>C2 small warehouse</td><td>111</td><td>653</td><td>Low volume, retail 8% — long-tail wholesale</td></tr>
+    <tr><td>C1 retail small</td><td>85</td><td>-7k*</td><td>Retail share 64% but small volume (includes negative returns) — retail small traders</td></tr>
+  </table>
+  <p class="muted">*C1 avg volume includes negative-value suppliers (returns/adjustments), not true core business; profile only.</p>
+  <div class="callout"><strong>Honest: no monthly forecast.</strong> Data has only 24 valid months (2018/2020 largely missing); category monthly forecast has <strong>mean linear R² = -1.89 (worse than using the mean)</strong> — samples non-continuous, series too short, <strong>forecast unreliable</strong>. So this project does not use forecasting as a recommendation basis; it provides a <strong>current-state diagnosis</strong> of structure &amp; performance. Consistent with "state honestly when data is insufficient, no fake predictions".</div>
+  <p><strong>Why not deep learning.</strong> Tabular, very few monthly samples (&lt;30 points), no learnable sequence; clustering &amp; statistics are explainable and directly implementable. DL lacks data and is unexplainable here — consistent with "use only when the business needs it".</p>
+</section>
+
+<section id="s5">
+  <div class="kicker">Part 5 · Recommendations</div>
+  <h2><span class="n">5.</span> One actionable plan</h2>
+  <div class="grid two">
+    <div class="card">
+      <span class="pill">Channel</span>
+      <h3 style="margin-top:6px">1 · Wholesale-first, add retail coverage</h3>
+      <p>Warehouse is 64%. Assess adding retail for high-volume-but-retail=0 items; stay wholesale-first and cut needless transfer.</p>
+    </div>
+    <div class="card">
+      <span class="pill">Supply risk</span>
+      <h3 style="margin-top:6px">2 · Diversify beer supplier concentration</h3>
+      <p>Top10 = 65.8%, beer-dominated. Sign volume-price agreements to lock supply; nurture mid-size suppliers (C3) to cut supply-cut/pricing risk.</p>
+    </div>
+    <div class="card">
+      <span class="pill">Assortment</span>
+      <h3 style="margin-top:6px">3 · Secure bestsellers, manage long tail</h3>
+      <p>Top1% items = 61%. Secure supply &amp; display for bestsellers; keep high-margin long-tail niches, retire long-zero-sale SKUs.</p>
+    </div>
+    <div class="card">
+      <span class="pill">Data governance</span>
+      <h3 style="margin-top:6px">4 · Complete 2018/2020 data</h3>
+      <p>Non-continuous monthly data makes forecasting unreliable. Complete the monthly data before time-series forecast; cross-year compare on 2017 vs 2019.</p>
+    </div>
+  </div>
+  <p class="muted">Repo deliverables: line (<code>sales_clean.parquet</code>), item (<code>item_level.parquet</code>), supplier (<code>supplier_level.parquet</code> + <code>supplier_clusters.parquet</code>), monthly (<code>monthly_agg.parquet</code>), metrics/ML (<code>metrics.json</code>/<code>ml_result.json</code>), this report.</p>
+</section>
+
+</div>
+<footer>Liquor Channel Reconciliation &amp; Sales Performance — Jiawei Wang</footer>
+</body>
+</html>
