@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>酒类渠道对账与销售绩效分析</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M9 5h14l-3 7v15H12V12z' fill='%23722f37'/%3E%3Crect x='13' y='14' width='6' height='4' fill='%23c9a227'/%3E%3C/svg%3E">
+<style>
+  :root{--burgundy:#722f37;--wine:#9d2933;--rose:#e6c9c3;--gold:#c9a227;--ink:#3b1e22;--muted:#8a6a6f;--line:#eee2dc;--bg:#faf7f3;--card:#fff}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.7}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px 80px}
+  header.hero{background:linear-gradient(135deg,#4a1f26,#9d2933);color:#fff;padding:56px 24px 44px;margin-bottom:8px}
+  header.hero h1{margin:0 0 12px;font-size:30px;line-height:1.25}
+  header.hero .sub{opacity:.94;font-size:16px;max-width:920px}
+  header.hero .meta{margin-top:18px;font-size:13px;opacity:.85}
+  nav.tabs{position:sticky;top:0;background:#fff;border-bottom:1px solid var(--line);z-index:5;padding:10px 24px}
+  nav.tabs .wrap{padding:0;display:flex;gap:6px;flex-wrap:wrap;max-width:1080px}
+  nav.tabs a{color:var(--burgundy);text-decoration:none;font-size:13px;font-weight:600;padding:6px 12px;border-radius:999px}
+  nav.tabs a:hover{background:#f7eae6}
+  section{padding:36px 0;border-bottom:1px solid var(--line)}
+  h2{font-size:22px;margin:0 0 8px}
+  h2 .n{color:var(--gold)}
+  .kicker{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);margin-bottom:4px}
+  h3{font-size:17px;margin:24px 0 8px}
+  p,li{font-size:14.5px}
+  .muted{color:var(--muted)}
+  .grid{display:grid;gap:16px}
+  .cards{grid-template-columns:repeat(3,1fr);margin:18px 0}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;box-shadow:0 1px 3px rgba(114,47,55,.06)}
+  .card .num{font-size:24px;font-weight:800;color:var(--burgundy)}
+  .card .lbl{font-size:12.5px;color:var(--muted)}
+  table{width:100%;border-collapse:collapse;font-size:14px;margin:14px 0;background:#fff;table-layout:fixed}
+  th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top;overflow-wrap:break-word}
+  th{background:#f7eae6;font-weight:700;color:var(--burgundy)}
+  .fig{margin:22px 0;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 16px;box-shadow:0 1px 3px rgba(114,47,55,.06)}
+  .fig h4{font-size:15px;margin:0 0 4px}
+  .fig .cap{font-size:12px;color:var(--muted);margin:0 0 12px}
+  .fig .why{display:flex;gap:12px;margin-top:14px;border-top:1px dashed var(--line);padding-top:12px}
+  .fig .why .tag{flex:0 0 60px;font-size:11px;font-weight:800;letter-spacing:.04em;text-transform:uppercase}
+  .fig .why .tag.so{color:var(--burgundy)}
+  .fig .why .tag.rec{color:var(--gold)}
+  .fig .why p{margin:0;font-size:13.5px}
+  .pill{display:inline-block;background:#f7eae6;color:var(--burgundy);border-radius:999px;padding:2px 10px;font-size:12px;font-weight:600;margin-right:6px}
+  .callout{background:#fdf4ec;border:1px solid #ecd9c0;border-left:4px solid var(--gold);padding:12px 16px;border-radius:8px;margin:14px 0;font-size:14px}
+  .two{grid-template-columns:1fr 1fr}
+  @media(max-width:720px){.two{grid-template-columns:1fr}.cards{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:520px){.bar{flex-wrap:wrap}.bar .bl{flex:0 0 100%;text-align:left;font-size:12px}.bar .bv{flex:0 0 140px;font-size:11px}.bar .track{min-width:40px}}
+  footer{padding:30px 24px 60px;font-size:12.5px;color:var(--muted)}
+  ul{margin:6px 0 14px;padding-left:20px}
+  .bar{display:flex;align-items:center;gap:10px;margin:7px 0;font-size:13px}
+  .bar .bl{width:210px;flex:0 0 210px;text-align:right;color:var(--ink)}
+  .bar .track{flex:1;background:#eee2dc;border-radius:6px;height:22px;position:relative;min-width:60px}
+  .bar .fill{height:100%;border-radius:6px}
+  .bar .bv{flex:0 0 150px;color:var(--muted);font-size:12px}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="kicker" style="color:#f2d0a0">数据分析项目 · 酒类渠道对账与销售绩效（Channel Reconciliation）</div>
+    <h1>酒类渠道对账与销售绩效分析</h1>
+    <p class="sub">30.8 万行酒类批发销售（2017–2020）：对账零售/仓储/调拨三渠道结构，量化渠道覆盖缺口与供应商集中度，识别高绩效类目与选品方向。</p>
+    <div class="meta">数据来源：酒类批发销售 · 307,645 行 / 37,321 商品 / 397 供应商 · 2017–2020</div>
+  </div>
+</header>
+
+<nav class="tabs">
+  <div class="wrap">
+    <a href="#s1"><span class="n">1</span> · 分析目标</a>
+    <a href="#s2"><span class="n">2</span> · 数据清洗</a>
+    <a href="#s3"><span class="n">3</span> · 指标与图表</a>
+    <a href="#s4"><span class="n">4</span> · 绩效建模</a>
+    <a href="#s5"><span class="n">5</span> · 建议</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+<section id="s1">
+  <div class="kicker">第一部分 · 业务目标</div>
+  <h2><span class="n">1.</span> 为什么做这个分析</h2>
+  <p>酒类批发商通过<strong>三条渠道</strong>出货：仓储批发（卖给下游零售商）、零售（直销/门店）、调拨（内部仓间转移）。核心问题：</p>
+  <ul>
+    <li><strong>渠道对账</strong>：三渠道的销量结构如何？哪些商品<strong>零售为 0</strong>（渠道覆盖缺口）？调拨是否合理？</li>
+    <li><strong>类目与供应商绩效</strong>：WINE/BEER/LIQUOR 谁在增长？<strong>供应商是否过度集中</strong>（议价与断供风险）？</li>
+  </ul>
+  <p><strong>一句话目标：</strong> 用渠道对账看清"货从哪条渠道出、谁贡献销量"，识别覆盖缺口与集中度风险，指导渠道与选品决策。</p>
+  <p><strong>诚实边界。</strong> 月度数据<strong>不连续</strong>（2018 仅 1–2 月、2020 缺多段，共 24 个有效月）→ <strong>月度预测不可靠</strong>（见第四部分，R² 为负）；部分类目含<strong>负值</strong>（退货/调整，如 OTHER -14.2 万）已识别但不作主营分析。对账与分析以<strong>总量与结构</strong>为主，不做不可靠的时序外推。</p>
+</section>
+
+<section id="s2">
+  <div class="kicker">第二部分 · 数据清洗与预处理</div>
+  <h2><span class="n">2.</span> 原始销售如何变成可用表</h2>
+  <table>
+    <colgroup><col style="width:34%"><col style="width:66%"></colgroup>
+    <tr><th>问题</th><th>处理</th></tr>
+    <tr><td>YEAR/MONTH 分离</td><td>合成日期 <code>ym</code>（2017-06 ~ 2020-09），标注数据缺口</td></tr>
+    <tr><td>SUPPLIER 缺失 167</td><td>填 <code>UNKNOWN</code>（占极小）</td></tr>
+    <tr><td>ITEM TYPE 缺失 1 / 杂项</td><td>STR_SUPPLIES/REF/DUNNAGE → <code>OTHER</code>；缺失 → <code>UNKNOWN</code></td></tr>
+    <tr><td>RETAIL SALES 缺失 3</td><td>填 0</td></tr>
+    <tr><td>负值</td><td>识别为退货/调整（KEGS 调拨 -1、OTHER 仓储 -14.2万），不作主营分析</td></tr>
+    <tr><td>派生</td><td>总销量=零售+仓储+调拨；主渠道；行级/商品级/供应商级/月度 四表</td></tr>
+  </table>
+  <p class="muted">输出：<code>sales_clean.parquet</code>、<code>item_level.parquet</code>（37,321）、<code>supplier_level.parquet</code>（397）、<code>monthly_agg.parquet</code>。</p>
+</section>
+
+<section id="s3">
+  <div class="kicker">第三部分 · 核心指标与图表</div>
+  <h2><span class="n">3.</span> 关键数字</h2>
+  <div class="grid cards">
+    <div class="card"><div class="num">30.8万</div><div class="lbl">销售行</div></div>
+    <div class="card"><div class="num">3.7万</div><div class="lbl">商品 × 397 供应商</div></div>
+    <div class="card"><div class="num">64.4%</div><div class="lbl">仓储（批发）主导</div></div>
+    <div class="card"><div class="num">39.6%</div><div class="lbl">零售为 0 的行</div></div>
+    <div class="card"><div class="num">65.8%</div><div class="lbl">Top10 供应商份额</div></div>
+    <div class="card"><div class="num">61%</div><div class="lbl">Top1% 商品销量</div></div>
+  </div>
+
+  <div class="fig">
+    <h4>渠道对账 —— 仓储批发占 64%，零售仅 18%</h4>
+    <p class="cap">总销量 12.08M 箱：零售 vs 仓储（批发）vs 调拨</p>
+    <div class="bar"><div class="bl">仓储（批发）</div><div class="track"><div class="fill" style="width:100%;background:#722f37"></div></div><div class="bv">7.78M · 64.4%</div></div>
+    <div class="bar"><div class="bl">零售（直销）</div><div class="track"><div class="fill" style="width:28%;background:#9d2933"></div></div><div class="bv">2.16M · 17.9%</div></div>
+    <div class="bar"><div class="bl">调拨（仓间）</div><div class="track"><div class="fill" style="width:27%;background:#c9a227"></div></div><div class="bv">2.13M · 17.7%</div></div>
+    <div class="why">
+      <div class="tag so">洞察</div>
+      <p><strong>仓储批发是绝对主渠道（64.4%）</strong>，零售仅 17.9%。近 40% 的行零售为 0（有销量但只走批发/调拨）——商品主要是 <strong>B2B 批发结构</strong>，零售直供覆盖有限。</p>
+    </div>
+    <div class="why">
+      <div class="tag rec">建议</div>
+      <p>对<strong>高销量但零售为 0</strong>的商品评估是否补零售渠道（直销毛利通常更高）；若零售非目标渠道，则明确以批发为主、减少调拨的无效搬运。</p>
+    </div>
+  </div>
+
+  <div class="fig">
+    <h4>类目 × 渠道 —— BEER 走批发，WINE 均衡，LIQUOR 走零售+调拨</h4>
+    <p class="cap">各类目三渠道销量（箱）</p>
+    <div class="bar"><div class="bl">BEER（7.67M）</div><div class="track"><div class="fill" style="width:85%;background:#722f37"></div></div><div class="bv">仓储 85%</div></div>
+    <div class="bar"><div class="bl">WINE（2.64M）</div><div class="track"><div class="fill" style="width:44%;background:#9d2933"></div></div><div class="bv">零售28/仓44/调28%</div></div>
+    <div class="bar"><div class="bl">LIQUOR（1.69M）</div><div class="track"><div class="fill" style="width:47%;background:#c9a227"></div></div><div class="bv">零售47/调47%</div></div>
+    <div class="bar"><div class="bl">KEGS（0.12M）</div><div class="track"><div class="fill" style="width:3%;background:#d8a8a0"></div></div><div class="bv">纯仓储</div></div>
+    <div class="why">
+      <div class="tag so">洞察</div>
+      <p>类目渠道结构差异大：<strong>BEER 85% 走仓储批发</strong>（大客户/零售商采购）、<strong>WINE 三渠道均衡</strong>（全渠道覆盖）、<strong>LIQUOR 依赖零售+调拨</strong>、KEGS 纯批发。不同类目的渠道逻辑不同。</p>
+    </div>
+    <div class="why">
+      <div class="tag rec">建议</div>
+      <p>按类目定渠道策略：BEER 巩固批发大客户；WINE 维持全渠道（毛利来源）；LIQUOR 补强仓储批发或压缩高调拨（调拨=非销售，成本项）。</p>
+    </div>
+  </div>
+
+  <div class="fig">
+    <h4>供应商集中度 —— Top10 占 65.8%，啤酒巨头主导</h4>
+    <p class="cap">HHI 集中度指数 705（&gt;2500 高度集中，此处 705 中等偏高）；Top 供应商</p>
+    <div class="bar"><div class="bl">Crown Imports</div><div class="track"><div class="fill" style="width:100%;background:#722f37"></div></div><div class="bv">1.82M</div></div>
+    <div class="bar"><div class="bl">Miller Brewing</div><div class="track"><div class="fill" style="width:88%;background:#9d2933"></div></div><div class="bv">1.60M</div></div>
+    <div class="bar"><div class="bl">Anheuser Busch</div><div class="track"><div class="fill" style="width:85%;background:#9d2933"></div></div><div class="bv">1.55M</div></div>
+    <div class="bar"><div class="bl">Heineken USA</div><div class="track"><div class="fill" style="width:52%;background:#c9a227"></div></div><div class="bv">0.94M</div></div>
+    <div class="bar"><div class="bl">E & J Gallo</div><div class="track"><div class="fill" style="width:29%;background:#c9a227"></div></div><div class="bv">0.53M</div></div>
+    <div class="why">
+      <div class="tag so">洞察</div>
+      <p><strong>Top10 供应商占 65.8% 销量</strong>，前五即四家啤酒（Crown/Miller/AB/Heineken）+ 一家酒庄（Gallo）——<strong>啤酒供应高度集中</strong>，议价与断供风险集中。</p>
+    </div>
+    <div class="why">
+      <div class="tag rec">建议</div>
+      <p>对 Top 啤酒供应商签订量价协议锁定供应；同时培育中型供应商（见第四部分聚类）分散风险、提升议价空间。</p>
+    </div>
+  </div>
+
+  <div class="fig">
+    <h4>商品帕累托 —— Top1% 商品贡献 61% 销量（极度集中）</h4>
+    <p class="cap">商品销量集中度（37,321 商品）</p>
+    <div class="bar"><div class="bl">Top 1% 商品（~373）</div><div class="track"><div class="fill" style="width:61%;background:#722f37"></div></div><div class="bv">61.1% 销量</div></div>
+    <div class="bar"><div class="bl">Top 10% 商品</div><div class="track"><div class="fill" style="width:94%;background:#9d2933"></div></div><div class="bv">93.7% 销量</div></div>
+    <div class="why">
+      <div class="tag so">洞察</div>
+      <p><strong>约 373 个商品（1%）贡献 61% 销量，Top10% 贡献 94%</strong>——极少数爆款决定大盘，绝大多数商品是长尾（低销量/陈列性）。</p>
+    </div>
+    <div class="why">
+      <div class="tag rec">建议</div>
+      <p>头部爆款保证供应与陈列；长尾商品做<strong>精细分类</strong>（保留高毛利小众、淘汰长期零销），避免 SKU 数量过度膨胀。</p>
+    </div>
+  </div>
+
+  <div class="fig">
+    <h4>年度销量 —— 2019 峰值，2018/2020 数据不完整</h4>
+    <p class="cap">按年销量（箱）；2018 仅 1–2 月、2020 缺多段 → 不作年度趋势外推</p>
+    <div class="bar"><div class="bl">2017</div><div class="track"><div class="fill" style="width:68%;background:#9d2933"></div></div><div class="bv">3.70M</div></div>
+    <div class="bar"><div class="bl">2018（不完整）</div><div class="track"><div class="fill" style="width:15%;background:#d8a8a0"></div></div><div class="bv">0.83M</div></div>
+    <div class="bar"><div class="bl">2019</div><div class="track"><div class="fill" style="width:100%;background:#722f37"></div></div><div class="bv">5.46M</div></div>
+    <div class="bar"><div class="bl">2020（不完整）</div><div class="track"><div class="fill" style="width:38%;background:#c9a227"></div></div><div class="bv">2.09M</div></div>
+    <div class="why">
+      <div class="tag so">洞察</div>
+      <p>2019 全年数据最完整、销量最高（5.46M）；<strong>2018/2020 仅部分月份</strong>（2018 年 0.83M、2020 年 2.09M 明显偏低是数据缺口而非真实下滑）。峰值月 2020-07（0.60M）。</p>
+    </div>
+    <div class="why">
+      <div class="tag rec">建议</div>
+      <p><strong>不要用 2018/2020 判断年度趋势</strong>（数据不全）。跨年比较以 2017 vs 2019 为基准；2020 需补齐完整数据再做对比。</p>
+    </div>
+  </div>
+</section>
+
+<section id="s4">
+  <div class="kicker">第四部分 · 绩效建模</div>
+  <h2><span class="n">4.</span> 供应商绩效聚类（原理 · 为什么 · 怎么用）</h2>
+  <p><strong>为什么做聚类。</strong> 397 家供应商规模、渠道、商品数差异大，用无监督聚类把供应商分成<strong>绩效特征相似的组</strong>，据此分配采购/管理资源——无需标签即可落地。</p>
+  <p><strong>原理与怎么用。</strong> 按供应商的<strong>销量（对数）、批发占比、零售占比、商品数（对数）</strong>标准化后 KMeans 分 4 组：</p>
+  <table>
+    <colgroup><col style="width:22%"><col style="width:18%"><col style="width:20%"><col style="width:40%"></colgroup>
+    <tr><th>组</th><th>家数</th><th>平均销量</th><th>画像</th></tr>
+    <tr><td>C0 大型批发</td><td>93</td><td>10.9万</td><td>大销量、零售占比 15%、商品多（~335）——核心批发供应商</td></tr>
+    <tr><td>C3 中型均衡</td><td>108</td><td>1.79万</td><td>中等销量、零售占比 40%、商品 ~41——潜力供应商</td></tr>
+    <tr><td>C2 小型仓储</td><td>111</td><td>653</td><td>小销量、零售占比 8%——长尾批发</td></tr>
+    <tr><td>C1 零售小商</td><td>85</td><td>-0.7万*</td><td>零售占比 64% 但销量小（含退货负值）——零售小商</td></tr>
+  </table>
+  <p class="muted">*C1 平均销量含负值供应商（退货/调整），不代表真实主营，作为画像参考。</p>
+  <div class="callout"><strong>诚实：不做月度预测。</strong> 数据仅 24 个有效月（2018/2020 大量缺失），类目月度预测<strong>线性 R² 均值 -1.89（比用均值还差）</strong>——样本不连续、序列过短，<strong>预测不可靠</strong>。因此本项目不把预测作为建议依据，只做结构与绩效的<strong>当下诊断</strong>。这与"数据不够就诚实说明、不做假预测"一致。</div>
+  <p><strong>为什么不用深度学习。</strong> 表格型、月级样本极少（&lt;30 点）、无序列规律可学；聚类与统计已可解释、直接落地。DL 在此既缺数据又不可解释——与"业务需要才用"一致。</p>
+</section>
+
+<section id="s5">
+  <div class="kicker">第五部分 · 建议</div>
+  <h2><span class="n">5.</span> 汇总成一份可落地的方案</h2>
+  <div class="grid two">
+    <div class="card">
+      <span class="pill">渠道对账</span>
+      <h3 style="margin-top:6px">1 · 批发为主、补零售覆盖</h3>
+      <p>仓储占 64%。对高销量但零售为 0 的商品评估补零售渠道；明确以批发为主、减少无效调拨。</p>
+    </div>
+    <div class="card">
+      <span class="pill">供应风险</span>
+      <h3 style="margin-top:6px">2 · 分散啤酒供应商集中</h3>
+      <p>Top10 占 65.8%、啤酒主导。签量价协议锁定供应，同时培育中型供应商（C3）降低断供/议价风险。</p>
+    </div>
+    <div class="card">
+      <span class="pill">选品</span>
+      <h3 style="margin-top:6px">3 · 爆款保供、长尾精细</h3>
+      <p>Top1% 商品占 61%。爆款保证供应陈列；长尾保留高毛利小众、淘汰长期零销 SKU。</p>
+    </div>
+    <div class="card">
+      <span class="pill">数据治理</span>
+      <h3 style="margin-top:6px">4 · 补齐 2018/2020 数据</h3>
+      <p>月度数据不连续导致预测不可靠。补全月度数据后再做时序预测，跨年比较以 2017 vs 2019 为准。</p>
+    </div>
+  </div>
+  <p class="muted">仓库交付物：行级（<code>sales_clean.parquet</code>）、商品级（<code>item_level.parquet</code>）、供应商级（<code>supplier_level.parquet</code> + <code>supplier_clusters.parquet</code>）、月度（<code>monthly_agg.parquet</code>）、指标/ML（<code>metrics.json</code>/<code>ml_result.json</code>）、本报告。</p>
+</section>
+
+</div>
+</body>
+</html>
