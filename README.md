@@ -47,4 +47,20 @@ tests/   test_cleaning.py, test_report_numbers.py
 报告/   酒类渠道对账与销售绩效分析.html  (burgundy-gold theme, each chart Insight+Action)
 ```
 
+## 数据来源
+
+原始数据在项目内 `data/raw/`（不入 git——clone 后请自行下载）。
+
+| 文件 | 说明 | Kaggle 下载 |
+|---|---|---|
+| `Warehouse_and_Retail_Sales.csv` | Ohio 州酒类销售，307,645 行（2017–2020） | `kaggle datasets download -d lalit7881/warehouse-and-retail-sales -p data/raw --unzip` |
+
+Kaggle 页面：https://www.kaggle.com/datasets/lalit7881/warehouse-and-retail-sales
+
+```bash
+pip install kaggle
+kaggle datasets download -d lalit7881/warehouse-and-retail-sales -p data/raw --unzip
+# 需要 kaggle.json / KAGGLE_USERNAME + KAGGLE_KEY 认证
+```
+
 — Jiawei Wang
