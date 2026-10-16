@@ -1,0 +1,115 @@
+{
+ "n_suppliers": 397,
+ "n_monthly": 145,
+ "supplier_features": [
+  "sales_log",
+  "warehouse_share",
+  "retail_share",
+  "items_log"
+ ],
+ "supplier_clusters": [
+  {
+   "cluster": 0,
+   "n": 93,
+   "sales": 108992.45989247311,
+   "retail_share": 0.15043065930867144,
+   "items": 334.60215053763443
+  },
+  {
+   "cluster": 1,
+   "n": 85,
+   "sales": -731.737294117647,
+   "retail_share": 0.6430316957902094,
+   "items": 3.764705882352941
+  },
+  {
+   "cluster": 2,
+   "n": 111,
+   "sales": 652.8680180180181,
+   "retail_share": 0.08389472343429491,
+   "items": 12.54954954954955
+  },
+  {
+   "cluster": 3,
+   "n": 108,
+   "sales": 17870.878055555557,
+   "retail_share": 0.3972263390021374,
+   "items": 41.351851851851855
+  }
+ ],
+ "forecast_rows": 24,
+ "forecast_by_category": {
+  "BEER": {
+   "linear": {
+    "mae": 43778.23,
+    "r2": -0.243
+   },
+   "rf": {
+    "mae": 30686.29,
+    "r2": 0.379
+   }
+  },
+  "KEGS": {
+   "linear": {
+    "mae": 1258.65,
+    "r2": -0.28
+   },
+   "rf": {
+    "mae": 1556.79,
+    "r2": -0.902
+   }
+  },
+  "LIQUOR": {
+   "linear": {
+    "mae": 6623.63,
+    "r2": -0.808
+   },
+   "rf": {
+    "mae": 6202.29,
+    "r2": -0.278
+   }
+  },
+  "NON-ALCOHOL": {
+   "linear": {
+    "mae": 851.4,
+    "r2": -0.346
+   },
+   "rf": {
+    "mae": 1176.05,
+    "r2": -0.731
+   }
+  },
+  "OTHER": {
+   "linear": {
+    "mae": 4616.56,
+    "r2": -10.756
+   },
+   "rf": {
+    "mae": 4157.54,
+    "r2": -9.039
+   }
+  },
+  "UNKNOWN": {
+   "linear": {
+    "mae": 0.2,
+    "r2": 0.0
+   },
+   "rf": {
+    "mae": 0.04,
+    "r2": 0.0
+   }
+  },
+  "WINE": {
+   "linear": {
+    "mae": 9647.64,
+    "r2": -0.78
+   },
+   "rf": {
+    "mae": 8419.17,
+    "r2": 0.158
+   }
+  }
+ },
+ "linear_mae_mean": 9539.47,
+ "linear_r2_mean": -1.888
+}

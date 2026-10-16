@@ -1,0 +1,253 @@
+{
+ "rows": 307645,
+ "items": 37321,
+ "suppliers": 397,
+ "categories": {
+  "WINE": 187640,
+  "LIQUOR": 64910,
+  "BEER": 42413,
+  "KEGS": 10146,
+  "NON-ALCOHOL": 1908,
+  "OTHER": 627,
+  "UNKNOWN": 1
+ },
+ "years": {
+  "2017": 3697204.2,
+  "2018": 826775.0,
+  "2019": 5461124.8,
+  "2020": 2091520.2
+ },
+ "total_sales": 12076624.3,
+ "channel": {
+  "retail": 2160899.4,
+  "warehouse": 7781756.3,
+  "transfer": 2133968.6
+ },
+ "channel_pct": {
+  "retail": 17.9,
+  "warehouse": 64.4,
+  "transfer": 17.7
+ },
+ "retail_zero_pct": 39.56,
+ "main_channel": {
+  "仓储": 174962,
+  "零售": 90397,
+  "调拨": 42286
+ },
+ "category_channel": [
+  {
+   "category": "BEER",
+   "retail": 574220.5,
+   "warehouse": 6527236.5,
+   "transfer": 566714.0,
+   "total_sales": 7668171.0
+  },
+  {
+   "category": "KEGS",
+   "retail": 0.0,
+   "warehouse": 118431.0,
+   "transfer": -1.0,
+   "total_sales": 118430.0
+  },
+  {
+   "category": "LIQUOR",
+   "retail": 802691.4,
+   "warehouse": 94906.3,
+   "transfer": 794735.7,
+   "total_sales": 1692333.4
+  },
+  {
+   "category": "NON-ALCOHOL",
+   "retail": 34084.3,
+   "warehouse": 26149.6,
+   "transfer": 26666.4,
+   "total_sales": 86900.3
+  },
+  {
+   "category": "OTHER",
+   "retail": 3404.5,
+   "warehouse": -141953.0,
+   "transfer": 11235.5,
+   "total_sales": -127313.0
+  },
+  {
+   "category": "UNKNOWN",
+   "retail": 0.0,
+   "warehouse": 1.0,
+   "transfer": 0.0,
+   "total_sales": 1.0
+  },
+  {
+   "category": "WINE",
+   "retail": 746498.6,
+   "warehouse": 1156984.9,
+   "transfer": 734618.0,
+   "total_sales": 2638101.5
+  }
+ ],
+ "hhi": 705.2,
+ "supplier_top10_share": 65.8,
+ "supplier_top5": [
+  {
+   "supplier": "CROWN IMPORTS",
+   "total_sales": 1819141.93,
+   "items": 67
+  },
+  {
+   "supplier": "MILLER BREWING COMPANY",
+   "total_sales": 1597808.94,
+   "items": 198
+  },
+  {
+   "supplier": "ANHEUSER BUSCH INC",
+   "total_sales": 1549362.68,
+   "items": 427
+  },
+  {
+   "supplier": "HEINEKEN USA",
+   "total_sales": 940796.79,
+   "items": 70
+  },
+  {
+   "supplier": "E & J GALLO WINERY",
+   "total_sales": 528656.13,
+   "items": 617
+  }
+ ],
+ "monthly_totals": [
+  {
+   "date": "2017-06-01",
+   "ym": "2017-06",
+   "total_sales": 571468.09
+  },
+  {
+   "date": "2017-07-01",
+   "ym": "2017-07",
+   "total_sales": 498561.83
+  },
+  {
+   "date": "2017-08-01",
+   "ym": "2017-08",
+   "total_sales": 558784.9
+  },
+  {
+   "date": "2017-09-01",
+   "ym": "2017-09",
+   "total_sales": 481827.51
+  },
+  {
+   "date": "2017-10-01",
+   "ym": "2017-10",
+   "total_sales": 485987.84
+  },
+  {
+   "date": "2017-11-01",
+   "ym": "2017-11",
+   "total_sales": 540852.81
+  },
+  {
+   "date": "2017-12-01",
+   "ym": "2017-12",
+   "total_sales": 559721.22
+  },
+  {
+   "date": "2018-01-01",
+   "ym": "2018-01",
+   "total_sales": 404705.58
+  },
+  {
+   "date": "2018-02-01",
+   "ym": "2018-02",
+   "total_sales": 422069.43
+  },
+  {
+   "date": "2019-01-01",
+   "ym": "2019-01",
+   "total_sales": 432777.4
+  },
+  {
+   "date": "2019-02-01",
+   "ym": "2019-02",
+   "total_sales": 401117.2
+  },
+  {
+   "date": "2019-03-01",
+   "ym": "2019-03",
+   "total_sales": 469023.37
+  },
+  {
+   "date": "2019-04-01",
+   "ym": "2019-04",
+   "total_sales": 462817.35
+  },
+  {
+   "date": "2019-05-01",
+   "ym": "2019-05",
+   "total_sales": 566801.48
+  },
+  {
+   "date": "2019-06-01",
+   "ym": "2019-06",
+   "total_sales": 523191.2
+  },
+  {
+   "date": "2019-07-01",
+   "ym": "2019-07",
+   "total_sales": 567244.3
+  },
+  {
+   "date": "2019-08-01",
+   "ym": "2019-08",
+   "total_sales": 529105.4
+  },
+  {
+   "date": "2019-09-01",
+   "ym": "2019-09",
+   "total_sales": 484288.6
+  },
+  {
+   "date": "2019-10-01",
+   "ym": "2019-10",
+   "total_sales": 526859.03
+  },
+  {
+   "date": "2019-11-01",
+   "ym": "2019-11",
+   "total_sales": 497899.5
+  },
+  {
+   "date": "2020-01-01",
+   "ym": "2020-01",
+   "total_sales": 434430.84
+  },
+  {
+   "date": "2020-03-01",
+   "ym": "2020-03",
+   "total_sales": 537463.16
+  },
+  {
+   "date": "2020-07-01",
+   "ym": "2020-07",
+   "total_sales": 595339.95
+  },
+  {
+   "date": "2020-09-01",
+   "ym": "2020-09",
+   "total_sales": 524286.29
+  }
+ ],
+ "peak_month": [
+  {
+   "ym": "2020-07",
+   "total_sales": 595339.95
+  }
+ ],
+ "year_total": {
+  "2017": 3697204.2,
+  "2018": 826775.01,
+  "2019": 5461124.83,
+  "2020": 2091520.24
+ },
+ "item_top1pct_share": 61.1,
+ "item_top10pct_share": 93.7
+}
