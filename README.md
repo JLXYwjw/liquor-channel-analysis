@@ -21,11 +21,11 @@ profiles categories/suppliers on **real** Ohio liquor sales data (307,645 rows,
 
 ## Charts
 
-![Channel reconciliation](assets/chart_01.png)
-![Category x channel](assets/chart_02.png)
-![Supplier concentration](assets/chart_03.png)
-![Item Pareto](assets/chart_04.png)
-![Annual volume](assets/chart_05.png)
+![Channel reconciliation](assets/chart_EN_01.png)
+![Category x channel](assets/chart_EN_02.png)
+![Supplier concentration](assets/chart_EN_03.png)
+![Item Pareto](assets/chart_EN_04.png)
+![Annual volume](assets/chart_EN_05.png)
 
 > Full interactive report: `报告/酒类渠道对账与销售绩效分析.html` — GitHub doesn't render HTML; open locally after cloning.
 
