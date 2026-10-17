@@ -1,4 +1,6 @@
 # Liquor Channel — Reconciliation & Sales Performance
+![CI](https://github.com/JLXYwjw/liquor-channel-analysis/actions/workflows/ci.yml/badge.svg)
+
 
 **The business problem.** A liquor wholesaler ships through three channels —
 **warehouse (wholesale to retailers), retail (direct), and transfers (inter-
@@ -84,3 +86,9 @@ index.zh-CN.html  # Chinese report (burgundy-gold theme, each chart Insight+Acti
 ```
 
 — Jiawei Wang
+
+## CI / Quality Gate
+
+Every push or pull request runs a [GitHub Actions](.github/workflows/ci.yml) workflow: a quality gate checks that English docs contain no Chinese, every referenced chart exists, and the bilingual README + index are all present; then `pytest` runs the test suite.
+
+![CI](https://github.com/JLXYwjw/liquor-channel-analysis/actions/workflows/ci.yml/badge.svg)

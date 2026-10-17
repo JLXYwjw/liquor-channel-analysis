@@ -1,4 +1,6 @@
 # 酒类渠道对账与销售绩效分析（Liquor Channel Reconciliation & Sales Performance）
+![CI](https://github.com/JLXYwjw/liquor-channel-analysis/actions/workflows/ci.yml/badge.svg)
+
 
 > 项目目标：酒类批发商走三条渠道——**仓储批发（批发给零售商）、零售（直销）、调拨（仓间）**。哪条渠道拉动销售、覆盖缺口在哪、供应是否过度集中？本项目在真实俄亥俄州酒类销售数据（307,645 行，37,321 个商品，397 家供应商，2017–2020）上做渠道对账与品类/供应商画像。
 
@@ -73,3 +75,9 @@ report/   酒类渠道对账与销售绩效分析.html  （勃艮第红+金配�
 ```
 
 — Jiawei Wang
+
+## CI / 质量门
+
+每次 push 或拉取请求都会触发 [GitHub Actions](.github/workflows/ci.yml) 工作流：质量门检查「英文文档不含中文、引用的图表都存在、中英 README 与 index 齐全」，随后运行 `pytest` 测试套件。
+
+![CI](https://github.com/JLXYwjw/liquor-channel-analysis/actions/workflows/ci.yml/badge.svg)
