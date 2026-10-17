@@ -1,3 +1,12 @@
+import os
+from pathlib import Path
+import pytest
+_CLEAN_OUT = Path("data/output") / "sales_clean.parquet"
+pytestmark = pytest.mark.skipif(
+    not _CLEAN_OUT.exists(),
+    reason="cleaned parquet absent (git-excluded); run cleaning first",
+)
+
 # -*- coding: utf-8 -*-
 """酒类渠道清洗口径测试。"""
 from pathlib import Path
